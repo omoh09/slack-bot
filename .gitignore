@@ -1,0 +1,18 @@
+# Ignore composer directory
+vendor/
+
+# Ignore log files and other generated files
+logs/
+*.log
+composer.lock
+
+# Ignore local configuration
+.env
+.env.local
+.env.*.local
+
+# Ignore .vscode settings
+.vscode/
+
+# Ignore IDE and editor-specific files
+.idea/
