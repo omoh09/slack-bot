@@ -1,0 +1,24 @@
+{
+  "name": "compile_php",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/omoh09/slack-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omoh09/slack-bot/issues"
+  },
+  "homepage": "https://github.com/omoh09/slack-bot#readme",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "express": "^4.18.2"
+  }
+}

@@ -1,5 +1,8 @@
 # Ignore composer directory
 vendor/
+node_modules/
+.git/
+
 
 # Ignore log files and other generated files
 logs/

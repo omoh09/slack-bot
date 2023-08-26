@@ -1,6 +1,8 @@
 <?php
-$slack_name = isset($_GET['slack_name']) ? $_GET['slack_name'] : null;
-$track = isset($_GET['track']) ? $_GET['track'] : null;
+// $slack_name = isset($_GET['slack_name']) ? $_GET['slack_name'] : null;
+// $track = isset($_GET['track']) ? $_GET['track'] : null;
+$slack_name = $argv[1];
+$track = $argv[2];
 $currentDayOfWeek = date('l');
 $currentUTCTime = gmdate('Y-m-d H:i:s');
 $githubFileURL = "https://github.com/omoh09/slack-bot/blob/welcome-bot/task.php";
