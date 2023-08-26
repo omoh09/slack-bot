@@ -1,60 +1,29 @@
 <?php
-header("Content-Type: application/json");
+$slack_name = isset($_GET['slack_name']) ? $_GET['slack_name'] : null;
+$track = isset($_GET['track']) ? $_GET['track'] : null;
 
-// Function to validate UTC offset
-function validateUTCOffset($offset) {
-    return preg_match('/^(\+|-)(0[0-9]|1[0-4])$/', $offset);
-}
+// Get the current day of the week
+$currentDayOfWeek = date('l');
 
-// Function to get the GitHub URL of the current file
-function getGitHubURL() {
-    $repoURL = "https://github.com/YourUsername/YourRepository"; 
-    $filePath = $_SERVER["SCRIPT_NAME"];
-    return "$repoURL/blob/main$filePath";
-}
+// Get the current UTC time (with validation of +/-2 hours)
+$currentUTCTime = gmdate('Y-m-d H:i:s');
 
-// Function to get the GitHub URL of the full source code
-function getFullSourceCodeURL() {
-    $repoURL = "https://github.com/YourUsername/YourRepository";
-    return "$repoURL";
-}
+// Define other information
+$name = "Gabriel";
+$githubFileURL = "https://github.com/omoh09/slack-bot/blob/welcome-bot/task.php";
+$githubSourceURL = "https://github.com/omoh09/slack-bot";
 
-// Check if 'name' and 'utc_offset' parameters are provided in the GET request
-if (isset($_GET['name']) && isset($_GET['utc_offset'])) {
-    $name = $_GET['name'];
-    $utcOffset = $_GET['utc_offset'];
+// Prepare the response array
+$response = [
+    'slack_name' => '@'.$slack_name,
+    'current_day' => $currentDayOfWeek,
+    'utc_time' => $currentUTCTime,
+    'track' => $track,
+    'github_file_url' => $githubFileURL,
+    'github_repo_url' => $githubSourceURL,
+];
 
-    // Validate UTC offset
-    if (validateUTCOffset($utcOffset)) {
-        $dayOfWeek = date("l");
-        $currentTime = gmdate("H:i:s");
-        $currentUTCOffset = gmdate("O");
-
-        // Calculate the UTC time based on the provided offset
-        $offsetSign = substr($utcOffset, 0, 1);
-        $offsetHours = substr($utcOffset, 1, 2);
-        $offsetMinutes = "00"; // UTC offset is in hours and minutes (e.g., +05:30)
-        $offsetSeconds = "00"; // Seconds are set to zero
-        $offset = $offsetSign . $offsetHours . $offsetMinutes . $offsetSeconds;
-        $utcTime = gmdate("H:i:s", strtotime("$offset hours"));
-
-        // Create the response array
-        $response = [
-            "name" => $name,
-            "day_of_week" => $dayOfWeek,
-            "utc_time" => $utcTime,
-            "track" => "YourTrack", // Replace with your track information
-            "github_url_current_file" => getGitHubURL(),
-            "github_url_full_source_code" => getFullSourceCodeURL(),
-        ];
-
-        // Return the response as JSON
-        echo json_encode($response);
-    } else {
-        // Invalid UTC offset
-        echo json_encode(["error" => "Invalid UTC offset"]);
-    }
-} else {
-    // Missing parameters
-    echo json_encode(["error" => "Missing 'name' and/or 'utc_offset' parameters"]);
-}
+// Return the response as JSON
+header('Content-Type: application/json');
+echo json_encode($response);
+?>
