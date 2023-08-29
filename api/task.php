@@ -5,7 +5,7 @@ $slack_name = $argv[1];
 $track = $argv[2];
 $currentDayOfWeek = date('l');
 $currentUTCTime = gmdate('Y-m-d H:i:s');
-$githubFileURL = "https://github.com/omoh09/slack-bot/blob/welcome-bot/task.php";
+$githubFileURL = "https://github.com/omoh09/slack-bot/blob/welcome-bot/api/task.php";
 $githubSourceURL = "https://github.com/omoh09/slack-bot";
 
 // Prepare the response array
